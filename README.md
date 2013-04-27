@@ -7,7 +7,7 @@ This plugin is developed against Websphere 8.5.
 
 ## create-ejb-stubs usage
 
-Sample configuration:
+### Sample configuration:
 
 ```xml
 <plugin>
@@ -26,4 +26,9 @@ Sample configuration:
         <classpath/> <!-- default to test scope classpath -->
 	</configuration>
   </plugin>
+```
+
+### Usage
+```sh 
+mvn websphere:create-ejb-stubs
 ```
