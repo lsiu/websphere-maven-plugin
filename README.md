@@ -7,7 +7,7 @@ This plugin is developed against Websphere 8.5.
 
 ## create-ejb-stubs usage
 
-### Sample configuration:
+### Sample configuration
 
 ```xml
 <plugin>
