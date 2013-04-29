@@ -15,6 +15,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<scm>
+		<connection>https://github.com/lsiu/websphere-maven-plugin.git</connection>
+		<developerConnection>https://github.com/lsiu/websphere-maven-plugin.git</developerConnection>
+		<url>https://github.com/lsiu/websphere-maven-plugin</url>
+	</scm>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
