@@ -42,6 +42,13 @@
 		<system>github</system>
 		<url>https://github.com/lsiu/websphere-maven-plugin/issues</url>
 	</issueManagement>
+	
+	<developers>
+		<developer>
+			<id>lsiu</id>
+			<name>Leonard Siu</name>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
