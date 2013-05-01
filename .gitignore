@@ -3,3 +3,5 @@
 .settings
 target/
 src/it/simple-it/build.log
+pom.xml.releaseBackup
+release.properties
