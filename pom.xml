@@ -42,13 +42,21 @@
 		<system>github</system>
 		<url>https://github.com/lsiu/websphere-maven-plugin/issues</url>
 	</issueManagement>
-	
+
 	<developers>
 		<developer>
 			<id>lsiu</id>
 			<name>Leonard Siu</name>
 		</developer>
 	</developers>
+	
+	<licenses>
+		<license>
+			<name>LGPL (GNU Lesser General Public License)</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<dependencies>
 		<dependency>
@@ -148,7 +156,7 @@
 					<localCheckout>true</localCheckout>
 					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 					<!-- need this for gpg plugin to work correctly -->
-                    <mavenExecutorId>forked-path</mavenExecutorId>
+					<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
 			</plugin>
 		</plugins>
