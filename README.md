@@ -13,7 +13,7 @@ This plugin is developed against Websphere 8.5.
 <plugin>
     <groupId>com.github.lsiu.maven.plugins</groupId>
     <artifactId>websphere-maven-plugin</artifactId>
-	<version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 	<configuration>
         <!-- list of interface/classes to create ejb stubs -->
 		<classes>
