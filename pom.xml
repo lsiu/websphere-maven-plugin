@@ -139,6 +139,8 @@
 					<pushChanges>false</pushChanges>
 					<localCheckout>true</localCheckout>
 					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+					<!-- need this for gpg plugin to work correctly -->
+        			<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
 			</plugin>
 		</plugins>
