@@ -78,17 +78,13 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 				StreamPumper outputPumper = new StreamPumper(p.getInputStream(),
 	                    new StreamConsumer() {
 	                        public void consumeLine(String line) {
-	                            if (getLog().isDebugEnabled()) {
-	                                getLog().info(line);
-	                            }
+                                getLog().info(line);
 	                        }
 	                    });
 	            StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
 	                    new StreamConsumer() {
 	                        public void consumeLine(String line) {
-	                            if (getLog().isDebugEnabled()) {
-	                                getLog().error(line);
-	                            }
+                                getLog().error(line);
 	                        }
 	                    });
 
@@ -96,9 +92,14 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 	            errorPumper.start();
 				
 				int exitCode = p.waitFor();
+				if (getLog().isDebugEnabled())
+					getLog().info("Exit Code: '" + exitCode + "'");
 				if (exitCode != 0)
 					throw new MojoExecutionException("Create EJB Stub exit with code: '" + exitCode + "'");
-			} catch (IOException | InterruptedException e) {
+			} catch (IOException e) {
+				throw new MojoExecutionException("Failed to run command: '"
+						+ StringUtils.join(command, " ") + "'", e);
+			} catch (InterruptedException e) {
 				throw new MojoExecutionException("Failed to run command: '"
 						+ StringUtils.join(command, " ") + "'", e);
 			}
