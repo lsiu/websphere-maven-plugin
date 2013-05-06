@@ -3,7 +3,7 @@
 
 	<groupId>com.github.lsiu.maven.plugins</groupId>
 	<artifactId>websphere-maven-plugin</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Websphere Maven Plugin</name>
@@ -35,7 +35,7 @@
 		<connection>https://github.com/lsiu/websphere-maven-plugin.git</connection>
 		<developerConnection>scm:git:https://github.com/lsiu/websphere-maven-plugin.git</developerConnection>
 		<url>scm:git:https://github.com/lsiu/websphere-maven-plugin</url>
-		<tag>HEAD</tag>
+		<tag>websphere-maven-plugin-1.0.1</tag>
 	</scm>
 	<issueManagement>
 		<system>github</system>
