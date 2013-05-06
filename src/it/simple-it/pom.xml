@@ -16,9 +16,9 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.github.lsiu.maven.plugins</groupId>
-				<artifactId>websphere-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<groupId>@project.groupId@</groupId>
+				<artifactId>@project.artifactId@</artifactId>
+				<version>@project.version@</version>
 				<executions>
 					<execution>
 						<id>create-stubs</id>
