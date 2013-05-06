@@ -45,57 +45,61 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 					"Missing <websphereHome> configuration");
 		if (websphereHome.exists() == false)
 			throw new MojoExecutionException(
-					"Directory specificed in <websphereHome> not found");
+					"Directory specificed in <websphereHome> '"
+							+ websphereHome.getAbsolutePath() + "' not found");
 		if (websphereHome.isDirectory() == false)
 			throw new MojoExecutionException(
-					"Value specified in <websphereHome> is not a directory");
+					"Value specified in <websphereHome> '"
+							+ websphereHome.getAbsolutePath()
+							+ "' is not a directory");
 
 		if (classes == null || classes.length == 0)
 			throw new MojoExecutionException(
 					"Must specify at least one <class> in configuration");
-		
+
 		if (outputDirectory == null)
 			throw new MojoExecutionException("Output Directory cannot be null");
-		
+
 		if (outputDirectory.exists() == false)
 			outputDirectory.mkdirs();
 
 		String[] command = new String[4];
-		command[0] = new File(websphereHome, getExecutable())
-				.getAbsolutePath();
+		command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
 		command[2] = "-cp";
 		command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
 
 		for (String clazz : classes) {
 			command[1] = clazz;
 			try {
-				if (getLog().isDebugEnabled()) 
+				if (getLog().isDebugEnabled())
 					getLog().info(StringUtils.join(command, " "));
-				
+
 				Process p = new ProcessBuilder().directory(outputDirectory)
 						.redirectErrorStream(true).command(command).start();
-				
-				StreamPumper outputPumper = new StreamPumper(p.getInputStream(),
-	                    new StreamConsumer() {
-	                        public void consumeLine(String line) {
-                                getLog().info(line);
-	                        }
-	                    });
-	            StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
-	                    new StreamConsumer() {
-	                        public void consumeLine(String line) {
-                                getLog().error(line);
-	                        }
-	                    });
 
-	            outputPumper.start();
-	            errorPumper.start();
-				
+				StreamPumper outputPumper = new StreamPumper(
+						p.getInputStream(), new StreamConsumer() {
+							public void consumeLine(String line) {
+								getLog().info(line);
+							}
+						});
+				StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
+						new StreamConsumer() {
+							public void consumeLine(String line) {
+								getLog().error(line);
+							}
+						});
+
+				outputPumper.start();
+				errorPumper.start();
+
 				int exitCode = p.waitFor();
 				if (getLog().isDebugEnabled())
 					getLog().info("Exit Code: '" + exitCode + "'");
 				if (exitCode != 0)
-					throw new MojoExecutionException("Create EJB Stub exit with code: '" + exitCode + "'");
+					throw new MojoExecutionException(
+							"Create EJB Stub exit with code: '" + exitCode
+									+ "'");
 			} catch (IOException e) {
 				throw new MojoExecutionException("Failed to run command: '"
 						+ StringUtils.join(command, " ") + "'", e);
