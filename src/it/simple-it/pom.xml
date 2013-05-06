@@ -28,7 +28,6 @@
 						</goals>
 						<configuration>
 							<classes>
-								<class>java.test</class>
 								<class>java.lang.Appendable</class>
 								<class>java.lang.Readable</class>
 							</classes>
