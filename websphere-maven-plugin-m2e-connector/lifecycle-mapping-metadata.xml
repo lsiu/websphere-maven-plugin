@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>com.github.lsiu.maven.plugins</groupId>
+        <artifactId>websphere-maven-plugin</artifactId>
+        <versionRange>[1.0.0,)</versionRange>
+        <goals>
+          <goal>create-ejb-stubs</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <configurator>
+          <id>com.github.lsiu.m2e.connector.websphere.maven.plugin.websphereProjectConfigurator</id>
+        </configurator>
+      </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
