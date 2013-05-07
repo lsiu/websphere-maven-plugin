@@ -2,6 +2,9 @@ Welcome to websphere-maven-plugin for Apache Maven 2
 
 This plugin is developed against Websphere 8.5.
 
+  * websphere-maven-plugin - actual maven plugin to be used within maven pom
+  * websphere-maven-plugin-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects
+
 ## Available goals
   * create-ejb-stubs
 
