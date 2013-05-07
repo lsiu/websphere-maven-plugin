@@ -22,7 +22,7 @@ This plugin is developed against Websphere 8.5.
 		</classes>
         <!-- following are optional -->
         <websphereHome/> <!-- default to /IBM/WebSphere/AppServer -->
-        <outputDirectory/> <!-- default to generated-sources-stubs -->
+        <outputDirectory/> <!-- default to target/classes -->
         <classpath/> <!-- default to test scope classpath -->
 	</configuration>
   </plugin>

@@ -33,7 +33,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 	@Parameter(property = "class")
 	private String[] classes;
 
-	@Parameter(defaultValue = "target/generated-sources/stubs", property = "outputDirectory")
+	@Parameter(defaultValue = "${project.build.outputDirectory}", property = "outputDirectory")
 	private File outputDirectory;
 
 	@Parameter(required = true, readonly = true, property = "project.testClasspathElements")

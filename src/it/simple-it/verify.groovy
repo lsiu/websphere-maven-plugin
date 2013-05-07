@@ -1,4 +1,4 @@
-File stubsDir = new File( basedir, "target/generated-sources/stubs" );
+File stubsDir = new File( basedir, "target/classes");
 
 assert stubsDir.isDirectory()
 
