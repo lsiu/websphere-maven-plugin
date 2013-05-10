@@ -10,11 +10,9 @@ This plugin is developed against Websphere 8.5.
 It generate the _XXX_Stub.class file required in order for stand alone java application to call
 Remote EJB on Websphere Application Server.
 
-## websphere-maven-plugin-m2e-connector (NOT READY)
+## websphere-maven-plugin-m2e-connector
 
 This m2e connector is to manage the websphere-maven-plugin and integrate it within the eclipse lifecycle. 
-
-The skeleton code is checked in, but is not ready for usage. It actually does nothing useful right now.
   
 ## Prerequisites
   * You must have IBM Websphere installed (This is tested against WAS 8.5, but may work with other versions). 
