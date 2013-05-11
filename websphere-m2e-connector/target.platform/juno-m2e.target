@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target includeMode="feature" name="Minimum required features" sequenceNumber="20">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.m2e.feature.feature.group" version="1.3.0.20130129-0926"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.8.2.v20130116-090414-8-8nFu3FNOfwKLRuqgXKIy9z0I83"/>
+<repository location="http://download.eclipse.org/releases/juno"/>
+</location>
+</locations>
+</target>

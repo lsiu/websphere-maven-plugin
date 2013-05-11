@@ -19,6 +19,7 @@
 		<module>create.ejb.stubs</module>
 		<module>feature</module>
 		<module>target.platform</module>
+		<module>eclipse.repository</module>
 	</modules>
 
 	<repositories>
