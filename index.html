@@ -34,15 +34,14 @@
 
 <ul>
 <li>websphere-maven-plugin - actual maven plugin to be used within maven pom</li>
-<li>websphere-maven-plugin-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects</li>
-</ul><h2>websphere-maven-plugin</h2>
+<li>websphere-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects</li>
+</ul>
+
+<h1>websphere-maven-plugin</h1>
 
 <p>It generate the _XXX_Stub.class file required in order for stand alone java application to call
 Remote EJB on Websphere Application Server.</p>
 
-<h2>websphere-maven-plugin-m2e-connector</h2>
-
-<p>This m2e connector is to manage the websphere-maven-plugin and integrate it within the eclipse lifecycle. </p>
 
 <h2>Prerequisites</h2>
 
@@ -85,6 +84,11 @@ Remote EJB on Websphere Application Server.</p>
 
 <div class="highlight"><pre>mvn websphere:create-ejb-stubs
 </pre></div>
+
+<h1>websphere-m2e-connector</h1>
+
+<p>This m2e connector is to manage integration of websphere-maven-plugin with m2e and eclipse</p>
+
       </section>
     </div>
 
