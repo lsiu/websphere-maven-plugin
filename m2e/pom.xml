@@ -16,7 +16,8 @@
 	<name>Websphere supplement m2e connector</name>
 
 	<modules>
-		<module>com.github.lsiu.eclipse.m2e.websphere.create.ejb.stubs</module>
+		<module>create.ejb.stubs</module>
+		<module>feature</module>
 		<module>target.platform</module>
 	</modules>
 
