@@ -5,7 +5,7 @@
       version="1.0.0.qualifier"
       provider-name="Leonard Siu">
 
-   <description url="http://www.example.com/description">
+   <description url="http://github.com/lsiu/websphere-maven-plugin">
       [Enter Feature Description here.]
    </description>
 
@@ -18,7 +18,7 @@
    </license>
 
    <plugin
-         id="com.github.lsiu.m2e.connector.websphere.maven.plugin"
+         id="com.github.lsiu.eclipse.m2e.websphere.create.ejb.stubs"
          download-size="0"
          install-size="0"
          version="0.0.0"

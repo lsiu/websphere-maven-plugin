@@ -6,6 +6,6 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <groupId>com.github.lsiu.eclipse.m2e.websphere</groupId>
-  <artifactId>target.platform</artifactId>
+  <artifactId>juno-m2e</artifactId>
   <packaging>eclipse-target-definition</packaging>
 </project>

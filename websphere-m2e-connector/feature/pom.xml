@@ -8,7 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>websphere.feature</artifactId>
+	<artifactId>com.github.lsiu.eclipse.m2e.websphere.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
 
 	<name>Websphere Supplement - Feature</name>

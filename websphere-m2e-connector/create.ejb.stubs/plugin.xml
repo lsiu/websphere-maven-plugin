@@ -5,8 +5,8 @@
    <extension
          point="org.eclipse.m2e.core.projectConfigurators">
       <configurator
-            class="com.github.lsiu.m2e.connector.websphere.maven.plugin.WebsphereProjectConfigurator"
-            id="com.github.lsiu.m2e.connector.websphere.maven.plugin.websphereProjectConfigurator"
+            class="com.github.lsiu.eclipse.m2e.websphere.maven.plugin.WebsphereProjectConfigurator"
+            id="com.github.lsiu.eclipse.m2e.websphere.maven.plugin.websphereProjectConfigurator"
             name="Websphere Project Configurator">
       </configurator>
    </extension>

@@ -1,4 +1,4 @@
-package com.github.lsiu.m2e.connector.websphere.maven.plugin;
+package com.github.lsiu.eclipse.m2e.websphere.maven.plugin;
 
 import org.apache.maven.plugin.MojoExecution;
 import org.eclipse.core.runtime.CoreException;

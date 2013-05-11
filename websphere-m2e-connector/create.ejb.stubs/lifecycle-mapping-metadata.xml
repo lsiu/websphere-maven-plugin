@@ -12,7 +12,7 @@
       </pluginExecutionFilter>
       <action>
         <configurator>
-          <id>com.github.lsiu.m2e.connector.websphere.maven.plugin.websphereProjectConfigurator</id>
+          <id>com.github.lsiu.eclipse.m2e.websphere.maven.plugin.websphereProjectConfigurator</id>
         </configurator>
       </action>
     </pluginExecution>
