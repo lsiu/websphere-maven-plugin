@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.github.lsiu.eclipse.m2e.websphere.feature_1.0.0.qualifier.jar" id="com.github.lsiu.eclipse.m2e.websphere.feature" version="1.0.0.qualifier"/>
+   <feature url="features/com.github.lsiu.eclipse.m2e.websphere.feature_1.0.0.qualifier.jar" id="com.github.lsiu.eclipse.m2e.websphere.feature" version="1.0.0.qualifier">
+      <category name="org.github.lsiu.eclipse.m2e.websphere"/>
+   </feature>
    <category-def name="org.github.lsiu.eclipse.m2e.websphere" label="m2e connector for websphere-maven-plugin"/>
 </site>
