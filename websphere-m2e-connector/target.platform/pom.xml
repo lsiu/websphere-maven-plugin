@@ -8,4 +8,5 @@
   <groupId>com.github.lsiu.eclipse.m2e.websphere</groupId>
   <artifactId>juno-m2e</artifactId>
   <packaging>eclipse-target-definition</packaging>
+  <name>m2e connector for websphere-maven-plugin target platform</name>
 </project>

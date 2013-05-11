@@ -17,4 +17,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<name>m2e connector for websphere-maven-plugin create-ejb-stubs</name>
 </project>

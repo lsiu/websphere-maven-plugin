@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Websphere Create EJB Stubs Connector
+Bundle-Name: m2e connector for websphere-maven-plugin create-ejb-stubs
 Bundle-SymbolicName: com.github.lsiu.eclipse.m2e.websphere.create.ejb.stubs;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Leonard Siu

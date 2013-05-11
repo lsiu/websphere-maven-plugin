@@ -8,4 +8,5 @@
   <groupId>com.github.lsiu.eclipse.m2e.websphere</groupId>
   <artifactId>eclipse.repository</artifactId>
   <packaging>eclipse-repository</packaging>
+  <name>m2e connector for websphere-maven-plugin repository</name>
 </project>

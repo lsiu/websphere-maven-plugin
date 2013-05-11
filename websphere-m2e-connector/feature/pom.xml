@@ -11,5 +11,5 @@
 	<artifactId>com.github.lsiu.eclipse.m2e.websphere.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
 
-	<name>Websphere Supplement - Feature</name>
+	<name>m2e connector for websphere-maven-plugin feature</name>
 </project>

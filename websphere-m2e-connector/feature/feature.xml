@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.github.lsiu.eclipse.m2e.websphere.feature"
-      label="Websphere Supplements"
+      label="m2e connector for websphere-maven-plugin"
       version="1.0.0.qualifier"
       provider-name="Leonard Siu">
 
