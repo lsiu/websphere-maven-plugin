@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Websphere Maven Plugin by lsiu</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Websphere Maven Plugin</h1>
+        <h2>Maven Plugin wrappers for Websphere tools</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/lsiu/websphere-maven-plugin/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/lsiu/websphere-maven-plugin/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/lsiu/websphere-maven-plugin" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p>Welcome to websphere-maven-plugin for Apache Maven 2</p>
+
+<p>This plugin is developed against Websphere 8.5.</p>
+
+<ul>
+<li>websphere-maven-plugin - actual maven plugin to be used within maven pom</li>
+<li>websphere-maven-plugin-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects</li>
+</ul><h2>websphere-maven-plugin</h2>
+
+<p>It generate the _XXX_Stub.class file required in order for stand alone java application to call
+Remote EJB on Websphere Application Server.</p>
+
+<h2>websphere-maven-plugin-m2e-connector</h2>
+
+<p>This m2e connector is to manage the websphere-maven-plugin and integrate it within the eclipse lifecycle. </p>
+
+<h2>Prerequisites</h2>
+
+<ul>
+<li>You must have IBM Websphere installed (This is tested against WAS 8.5, but may work with other versions). </li>
+</ul><p>More specifically, this plugin used the createEJBStubs.(bat|sh) script that comes with the WAS binary.</p>
+
+<p>By default, this plugin expects the createEJBStub script to be at:</p>
+
+<ul>
+<li>\IBM\WebSphere\AppServer\bin (Windows) - The drive is omitted. It will default to whatever drive the plugin is ran in.</li>
+<li>/IBM/WebSphere/AppServer/bin (*NIX)</li>
+</ul><h2>Available goals</h2>
+
+<ul>
+<li>create-ejb-stubs</li>
+</ul><h2>create-ejb-stubs usage</h2>
+
+<h3>Sample configuration</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.github.lsiu.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>websphere-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="c">&lt;!-- list of interface/classes to create ejb stubs --&gt;</span>
+        <span class="nt">&lt;classes&gt;</span>
+            <span class="nt">&lt;class&gt;</span>java.lang.Appendable<span class="nt">&lt;/class&gt;</span>
+            <span class="nt">&lt;class&gt;</span>java.lang.Readable<span class="nt">&lt;/class&gt;</span>
+        <span class="nt">&lt;/classes&gt;</span>
+        <span class="c">&lt;!-- following are optional --&gt;</span>
+        <span class="nt">&lt;websphereHome/&gt;</span> <span class="c">&lt;!-- default to /IBM/WebSphere/AppServer --&gt;</span>
+        <span class="nt">&lt;outputDirectory/&gt;</span> <span class="c">&lt;!-- default to target/classes --&gt;</span>
+        <span class="nt">&lt;classpath/&gt;</span> <span class="c">&lt;!-- default to test scope classpath --&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+  <span class="nt">&lt;/plugin&gt;</span>
+</pre></div>
+
+<h3>Usage</h3>
+
+<div class="highlight"><pre>mvn websphere:create-ejb-stubs
+</pre></div>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
