@@ -3,16 +3,7 @@ Welcome to websphere-maven-plugin for Apache Maven 2
 This plugin is developed against Websphere 8.5.
 
   * websphere-maven-plugin - actual maven plugin to be used within maven pom
-  * websphere-maven-plugin-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects
-  
-## websphere-maven-plugin
-
-It generate the _XXX_Stub.class file required in order for stand alone java application to call
-Remote EJB on Websphere Application Server.
-
-## websphere-maven-plugin-m2e-connector
-
-This m2e connector is to manage the websphere-maven-plugin and integrate it within the eclipse lifecycle. 
+  * websphere-m2e-connector - eclipse plugin to integrate the stub creation process into eclipse projects
   
 ## Prerequisites
   * You must have IBM Websphere installed (This is tested against WAS 8.5, but may work with other versions). 
@@ -22,11 +13,14 @@ More specifically, this plugin used the createEJBStubs.(bat|sh) script that come
 By default, this plugin expects the createEJBStub script to be at:
   * \IBM\WebSphere\AppServer\bin (Windows) - The drive is omitted. It will default to whatever drive the plugin is ran in.
   * /IBM/WebSphere/AppServer/bin (*NIX)
+  
+## websphere-maven-plugin
 
-## Available goals
+It generate the _XXX_Stub.class file required in order for stand alone java application to call
+Remote EJB on Websphere Application Server.
+
+### Available goals
   * create-ejb-stubs
-
-## create-ejb-stubs usage
 
 ### Sample configuration
 
@@ -53,3 +47,8 @@ By default, this plugin expects the createEJBStub script to be at:
 ```sh 
 mvn websphere:create-ejb-stubs
 ```
+
+## websphere-m2e-connector
+
+This m2e connector is to manage the websphere-maven-plugin and integrate it within the eclipse lifecycle. 
+
