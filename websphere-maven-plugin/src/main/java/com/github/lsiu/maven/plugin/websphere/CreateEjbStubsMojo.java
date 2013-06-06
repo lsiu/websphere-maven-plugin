@@ -33,8 +33,14 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 	@Parameter(property = "class")
 	private String[] classes;
 
+    @Parameter(property = "inputFile")
+    private File inputFile;
+
 	@Parameter(defaultValue = "${project.build.outputDirectory}", property = "outputDirectory")
 	private File outputDirectory;
+
+    @Parameter(property = "updateFile")
+    private File updateFile;
 
 	@Parameter(required = true, readonly = true, property = "project.testClasspathElements")
 	protected List<String> classpath;
@@ -45,7 +51,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 					"Missing <websphereHome> configuration");
 		if (websphereHome.exists() == false)
 			throw new MojoExecutionException(
-					"Directory specificed in <websphereHome> '"
+					"Directory specified in <websphereHome> '"
 							+ websphereHome.getAbsolutePath() + "' not found");
 		if (websphereHome.isDirectory() == false)
 			throw new MojoExecutionException(
@@ -53,73 +59,116 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 							+ websphereHome.getAbsolutePath()
 							+ "' is not a directory");
 
-		if (classes == null || classes.length == 0)
-			throw new MojoExecutionException(
-					"Must specify at least one <class> in configuration");
-
 		if (outputDirectory == null)
 			throw new MojoExecutionException("Output Directory cannot be null");
 
 		if (outputDirectory.exists() == false)
 			outputDirectory.mkdirs();
 
-		String[] command = new String[4];
-		command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
-		command[2] = "-cp";
-		command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
-
-		for (String clazz : classes) {
-			command[1] = clazz;
-			try {
-				if (getLog().isDebugEnabled())
-					getLog().info(StringUtils.join(command, " "));
-
-				Process p = new ProcessBuilder().directory(outputDirectory)
-						.redirectErrorStream(true).command(command).start();
-				final StringBuffer buf = new StringBuffer();
-				StreamPumper outputPumper = new StreamPumper(
-						p.getInputStream(), new StreamConsumer() {
-							public void consumeLine(String line) {
-								getLog().info(line);
-								buf.append(line);
-							}
-						});
-				StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
-						new StreamConsumer() {
-							public void consumeLine(String line) {
-								getLog().error(line);
-							}
-						});
-
-				outputPumper.start();
-				errorPumper.start();
-
-				int exitCode = p.waitFor();
-
-				if (getLog().isDebugEnabled())
-					getLog().info("Exit Code: '" + exitCode + "'");
-
-				if (exitCode != 0)
-					throw new MojoExecutionException(
-							"Create EJB Stub exit with code: '" + exitCode
-									+ "'");
-				// looks like exit code is always zero from createEjbStub
-				if (buf.toString().endsWith("Command Successful") == false) {
-					throw new MojoExecutionException(
-							"Create EJB Stub failed:\n" + buf.toString());
-				}
-
-			} catch (IOException e) {
-				throw new MojoExecutionException("Failed to run command: '"
-						+ StringUtils.join(command, " ") + "'", e);
-			} catch (InterruptedException e) {
-				throw new MojoExecutionException("Failed to run command: '"
-						+ StringUtils.join(command, " ") + "'", e);
-			}
-		}
+        if (inputFile != null) {
+            createEjbStubsForInputFile();
+        }
+        else if (classes != null  && classes.length > 0) {
+            createEjbStubsForClasses();
+        }
+        else {
+            throw new MojoExecutionException(
+                    "Must specify <inputFile> or at least one <class> in configuration");
+        }
 	}
 
-	private static final String getExecutable() {
+    private void createEjbStubsForClasses() throws MojoExecutionException {
+        String[] command = new String[4];
+        command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
+        command[2] = "-cp";
+        command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
+
+        for (String clazz : classes) {
+            command[1] = clazz;
+            executeCreateEjbStubs(command);
+        }
+    }
+
+    private void createEjbStubsForInputFile() throws MojoExecutionException {
+        if (!inputFile.exists()) {
+            throw new MojoExecutionException("File specified in <inputFile> '" +
+                    inputFile.getAbsolutePath() + "' not found");
+        }
+
+        final String[] command;
+
+        if (updateFile != null) {
+            if (!updateFile.exists()) {
+                throw new MojoExecutionException("File specified in <updateFile> '" +
+                        updateFile.getAbsolutePath() + "' not found");
+            }
+
+            command = new String[6];
+            command[4] = "-updatefile";
+            command[5] = updateFile.getAbsolutePath();
+        }
+        else {
+            command = new String[4];
+        }
+
+        command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
+        command[1] = inputFile.getAbsolutePath();
+        command[2] = "-cp";
+        command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
+
+        executeCreateEjbStubs(command);
+    }
+
+    private void executeCreateEjbStubs(final String[] command) throws MojoExecutionException {
+        try {
+            if (getLog().isDebugEnabled())
+                getLog().info(StringUtils.join(command, " "));
+
+            Process p = new ProcessBuilder().directory(outputDirectory)
+                    .redirectErrorStream(true).command(command).start();
+            final StringBuffer buf = new StringBuffer();
+            StreamPumper outputPumper = new StreamPumper(
+                    p.getInputStream(), new StreamConsumer() {
+                public void consumeLine(String line) {
+                    getLog().info(line);
+                    buf.append(line);
+                }
+            });
+            StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
+                    new StreamConsumer() {
+                        public void consumeLine(String line) {
+                            getLog().error(line);
+                        }
+                    });
+
+            outputPumper.start();
+            errorPumper.start();
+
+            int exitCode = p.waitFor();
+
+            if (getLog().isDebugEnabled())
+                getLog().info("Exit Code: '" + exitCode + "'");
+
+            if (exitCode != 0)
+                throw new MojoExecutionException(
+                        "Create EJB Stub exit with code: '" + exitCode
+                                + "'");
+            // looks like exit code is always zero from createEjbStub
+            if (buf.toString().endsWith("Command Successful") == false) {
+                throw new MojoExecutionException(
+                        "Create EJB Stub failed:\n" + buf.toString());
+            }
+
+        } catch (IOException e) {
+            throw new MojoExecutionException("Failed to run command: '"
+                    + StringUtils.join(command, " ") + "'", e);
+        } catch (InterruptedException e) {
+            throw new MojoExecutionException("Failed to run command: '"
+                    + StringUtils.join(command, " ") + "'", e);
+        }
+    }
+
+    private static final String getExecutable() {
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 			return "bin/createEJBStubs.bat";
 		} else {
