@@ -119,54 +119,56 @@ public class CreateEjbStubsMojo extends AbstractMojo {
         executeCreateEjbStubs(command);
     }
 
-    private void executeCreateEjbStubs(final String[] command) throws MojoExecutionException {
-        try {
-            if (getLog().isDebugEnabled())
-                getLog().info(StringUtils.join(command, " "));
+	private void executeCreateEjbStubs(final String[] command) throws MojoExecutionException {
+		try {
+			if (getLog().isDebugEnabled())
+				getLog().info(StringUtils.join(command, " "));
 
-            Process p = new ProcessBuilder().directory(outputDirectory)
-                    .redirectErrorStream(true).command(command).start();
-            final StringBuffer buf = new StringBuffer();
-            StreamPumper outputPumper = new StreamPumper(
-                    p.getInputStream(), new StreamConsumer() {
-                public void consumeLine(String line) {
-                    getLog().info(line);
-                    buf.append(line);
-                }
-            });
-            StreamPumper errorPumper = new StreamPumper(p.getErrorStream(),
-                    new StreamConsumer() {
-                        public void consumeLine(String line) {
-                            getLog().error(line);
-                        }
-                    });
+			Process p = null;
+			int retry = 0;
+			boolean cmdSuccess = false;
+			while (!cmdSuccess) {
+				try {
+					p = new ProcessBuilder().directory(outputDirectory).redirectErrorStream(true).command(command).start();
+					final StringBuffer buf = new StringBuffer();
+					StreamPumper outputPumper = new StreamPumper(p.getInputStream(), new StreamConsumer() {
+						public void consumeLine(String line) {
+							getLog().info(line);
+							buf.append(line);
+						}
+					});
+					StreamPumper errorPumper = new StreamPumper(p.getErrorStream(), new StreamConsumer() {
+						public void consumeLine(String line) {
+							getLog().error(line);
+						}
+					});
 
-            outputPumper.start();
-            errorPumper.start();
+					outputPumper.start();
+					errorPumper.start();
 
-            int exitCode = p.waitFor();
+					int exitCode = p.waitFor();
 
-            if (getLog().isDebugEnabled())
-                getLog().info("Exit Code: '" + exitCode + "'");
+					if (getLog().isDebugEnabled())
+						getLog().info("Exit Code: '" + exitCode + "'");
 
-            if (exitCode != 0)
-                throw new MojoExecutionException(
-                        "Create EJB Stub exit with code: '" + exitCode
-                                + "'");
-            // looks like exit code is always zero from createEjbStub
-            if (buf.toString().endsWith("Command Successful") == false) {
-                throw new MojoExecutionException(
-                        "Create EJB Stub failed:\n" + buf.toString());
-            }
-
-        } catch (IOException e) {
-            throw new MojoExecutionException("Failed to run command: '"
-                    + StringUtils.join(command, " ") + "'", e);
-        } catch (InterruptedException e) {
-            throw new MojoExecutionException("Failed to run command: '"
-                    + StringUtils.join(command, " ") + "'", e);
-        }
-    }
+					if (exitCode != 0)
+						throw new MojoExecutionException("Create EJB Stub exit with code: '" + exitCode + "'");
+					// looks like exit code is always zero from createEjbStub
+					if (buf.toString().endsWith("Command Successful") == false) {
+						throw new MojoExecutionException("Create EJB Stub failed:\n" + buf.toString());
+					}
+					cmdSuccess = true;
+				} catch (Exception e) {
+					getLog().info(String.format("cmd failed:%s, retry:%s", StringUtils.join(command, " "), retry), e);
+					if (++retry == 5) {
+						throw new Exception(e);
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new MojoExecutionException("Failed to run command: '" + StringUtils.join(command, " ") + "'", e);
+		}
+	}
 
     private static final String getExecutable() {
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
