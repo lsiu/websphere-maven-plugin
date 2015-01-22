@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.shared.model.fileset.FileSet;
+import org.apache.maven.shared.model.fileset.util.FileSetManager;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.StreamConsumer;
@@ -41,6 +44,9 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 
     @Parameter(property = "updateFile")
     private File updateFile;
+    
+    @Parameter(property = "filesets")
+    private List<FileSet> filesets;
 
     @Parameter(required = true, readonly = true, property = "project.testClasspathElements")
     protected List<String> classpath;
@@ -77,6 +83,8 @@ public class CreateEjbStubsMojo extends AbstractMojo {
             createEjbStubsForInputFile();
         } else if (classes != null && classes.length > 0) {
             createEjbStubsForClasses();
+        } else if (filesets != null && filesets.size() > 0) {
+        	createEjbStubsForClassesSet();
         } else {
             throw new MojoExecutionException(
                     "Must specify <inputFile> or at least one <class> in configuration");
@@ -92,6 +100,24 @@ public class CreateEjbStubsMojo extends AbstractMojo {
         for (String clazz : classes) {
             command[1] = clazz;
             executeCreateEjbStubs(command);
+        }
+    }
+    
+    private void createEjbStubsForClassesSet() throws MojoExecutionException {
+
+    	FileSetManager fileSetManager = new FileSetManager();
+    	String[] command = new String[4];
+        command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
+        command[2] = "-cp";
+        command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
+        
+        for (FileSet fileset : filesets) {
+        	String[] includedFiles = fileSetManager.getIncludedFiles( fileset );
+        	for (String clazz : includedFiles) {
+                clazz = FilenameUtils.removeExtension(clazz);
+                command[1] = clazz.replace(File.separator, ".");
+                executeCreateEjbStubs(command);
+			}
         }
     }
 
