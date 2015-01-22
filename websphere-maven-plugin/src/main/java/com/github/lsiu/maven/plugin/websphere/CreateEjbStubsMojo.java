@@ -168,10 +168,15 @@ public class CreateEjbStubsMojo extends AbstractMojo {
                                 "Create EJB Stub exit with code: '" + exitCode
                                 + "'");
                     }
+                    
                     // looks like exit code is always zero from createEjbStub
-                    if (buf.toString().endsWith("Command Successful") == false) {
+                    // Problem with build in other language not really a good correction ...
+                    if (!buf.toString().endsWith("Command Successful") &&  
+                    		!buf.toString().endsWith("ussite de la commande")) {
                         throw new MojoExecutionException(
-                                "Create EJB Stub failed:\n" + buf.toString());
+                                "Error during the creation of EJB Stub failed:\n" +
+                        "1. Le language use for the build isn't English or French\n" + 
+                        "2. Other error : "+ buf.toString());
                     }
                     cmdSuccess = true;
                 } catch (IOException e) {
