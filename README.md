@@ -27,4 +27,4 @@ For example
         <classpath/> <!-- default to test scope classpath -->
     </configuration>
 </plugin>
-```xml
+```
