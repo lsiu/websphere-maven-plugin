@@ -1,5 +1,3 @@
-Forked from [lsiu/websphere-maven-plugin](https://github.com/lsiu/websphere-maven-plugin)
-
 Maven plugin for generate the \_XXX\_Stub.class file required in order for stand alone java application to call Remote EJB on Websphere Application Server.
 
 Add the parameter FileSet to replace the class parameter and don't put all the remote class but just **/*Remote.class.
@@ -28,3 +26,6 @@ For example
     </configuration>
 </plugin>
 ```
+
+##Contributions
+[apenvern](https://github.com/apenvern/websphere-maven-plugin)
