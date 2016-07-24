@@ -44,7 +44,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
 
     @Parameter(property = "updateFile")
     private File updateFile;
-    
+
     @Parameter(property = "filesets")
     private List<FileSet> filesets;
 
@@ -102,7 +102,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
             executeCreateEjbStubs(command);
         }
     }
-    
+
     private void createEjbStubsForClassesSet() throws MojoExecutionException {
 
     	FileSetManager fileSetManager = new FileSetManager();
@@ -110,7 +110,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
         command[0] = new File(websphereHome, getExecutable()).getAbsolutePath();
         command[2] = "-cp";
         command[3] = StringUtils.join(classpath.toArray(), File.pathSeparator);
-        
+
         for (FileSet fileset : filesets) {
         	String[] includedFiles = fileSetManager.getIncludedFiles( fileset );
         	for (String clazz : includedFiles) {
@@ -194,14 +194,16 @@ public class CreateEjbStubsMojo extends AbstractMojo {
                                 "Create EJB Stub exit with code: '" + exitCode
                                 + "'");
                     }
-                    
+
                     // looks like exit code is always zero from createEjbStub
                     // Problem with build in other language not really a good correction ...
-                    if (!buf.toString().endsWith("Command Successful") &&  
-                    		!buf.toString().endsWith("ussite de la commande")) {
+                    if (!buf.toString().endsWith("Command Successful")
+                    		&& !buf.toString().endsWith("ussite de la commande")  // French
+                            && !buf.toString().endsWith("Befehl erfolgreic") // German
+                            ) {
                         throw new MojoExecutionException(
                                 "Error during the creation of EJB Stub failed:\n" +
-                        "1. Le language use for the build isn't English or French\n" + 
+                        "1. The language use for the build isn't English, French or German\n" +
                         "2. Other error : "+ buf.toString());
                     }
                     cmdSuccess = true;
