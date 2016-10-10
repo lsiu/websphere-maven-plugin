@@ -16,7 +16,7 @@ For example
 <plugin>
     <groupId>com.github.lsiu.maven.plugins</groupId>
     <artifactId>websphere-maven-plugin</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
     <configuration>
         <!-- list of interface/classes to create ejb stubs -->
         <fileSets>
