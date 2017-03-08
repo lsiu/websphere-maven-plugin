@@ -199,7 +199,7 @@ public class CreateEjbStubsMojo extends AbstractMojo {
                     // Problem with build in other language not really a good correction ...
                     if (!buf.toString().endsWith("Command Successful")
                     		&& !buf.toString().endsWith("ussite de la commande")  // French
-                            && !buf.toString().endsWith("Befehl erfolgreic") // German
+                            && !buf.toString().endsWith("Befehl erfolgreich") // German
                             ) {
                         throw new MojoExecutionException(
                                 "Error during the creation of EJB Stub failed:\n" +
