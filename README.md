@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.1.3
+* Fix [issue #8 Plugin does not finish correctly when Websphere's language is German](https://github.com/lsiu/websphere-maven-plugin/issues/8)
+
 ### 1.1.2
 * Check for French and German version of the "Command Successful" to indicate CreateEjbStub command completed successfully
 * Merged changes from [apenvern](https://github.com/apenvern/websphere-maven-plugin) - french support and support for specifying Remote interface
